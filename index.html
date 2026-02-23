@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Helix Market — Coming Soon / Live</title>
+<title>Helix Market — Coming Soon</title>
 <script src="https://s3.tradingview.com/tv.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
   /* Reset & global */
   * { margin:0; padding:0; box-sizing:border-box; }
-  html, body { height: 100%; font-family: 'Inter', sans-serif; }
+  html, body { height: 100%; font-family: 'Inter', sans-serif; overflow: hidden; }
 
-  /* Blurred background */
+  /* Full background blur */
   body::before {
     content: "";
     position: fixed;
@@ -29,7 +28,7 @@
     z-index: -1;
   }
 
-  /* Full-screen Coming Soon overlay */
+  /* Coming Soon Overlay */
   #comingSoonOverlay {
     position: fixed;
     top:0; left:0; width:100%; height:100%;
@@ -57,10 +56,16 @@
   .countdown div { display: flex; flex-direction: column; align-items: center; }
   .countdown div span { font-size: 24px; color: #ccc; margin-top: 5px; }
 
+  @media(max-width:600px){
+    #comingSoonOverlay h1 { font-size:40px; }
+    .countdown { flex-direction: column; gap:20px; font-size:36px; }
+    .countdown div span { font-size:18px; }
+  }
+
   /* Header */
   header {
     position: sticky;
-    top: 0;
+    top:0;
     z-index: 100;
     display: flex;
     justify-content: space-between;
@@ -83,7 +88,9 @@
 
   /* Sections */
   section { padding:80px 50px; }
-  h2 { font-size:36px; margin-bottom:40px; text-align:center; color:#00ff88; }
+
+  /* Headers with same text colors as original */
+  h1,h2 { color: #00ff88; margin-bottom:30px; text-align:center; line-height:1.2; }
 
   /* Cards */
   .cards { display:flex; flex-wrap:wrap; justify-content:center; gap:30px; }
@@ -101,28 +108,10 @@
   .step { padding-left:12px; border-left:3px solid #00ff88; }
 
   /* Chart Boxes */
-  .chart-box {
-    background: rgba(20,20,20,0.95);
-    border-radius:20px;
-    padding:35px;
-    margin:40px auto;
-    max-width:1100px;
-    box-shadow:0 0 40px rgba(0,255,136,0.2);
-  }
+  .chart-box { background: rgba(20,20,20,0.95); border-radius:20px; padding:35px; margin:40px auto; max-width:1100px; box-shadow:0 0 40px rgba(0,255,136,0.2); }
 
   /* Ad Card */
-  .ad-card {
-    background: linear-gradient(135deg, #00ff88, #00cc66);
-    padding:35px;
-    border-radius:20px;
-    max-width:900px;
-    margin:60px auto;
-    text-align:center;
-    color:#000;
-    font-weight:600;
-    font-size:20px;
-    transition: transform 0.3s;
-  }
+  .ad-card { background: linear-gradient(135deg, #00ff88, #00cc66); padding:35px; border-radius:20px; max-width:900px; margin:60px auto; text-align:center; color:#000; font-weight:600; font-size:20px; transition: transform 0.3s; }
   .ad-card:hover { transform: scale(1.05); }
   .ad-card a { color:#000; font-weight:700; text-decoration:underline; }
 
@@ -130,12 +119,7 @@
   footer { text-align:center; padding:40px 20px; font-size:14px; opacity:0.6; }
 
   /* Responsive */
-  @media(max-width:1000px) { .cards { flex-direction:column; align-items:center; } }
-  @media(max-width:600px){
-    h1 { font-size:40px; }
-    .countdown { flex-direction: column; gap: 20px; font-size:36px; }
-    .countdown div span { font-size:18px; }
-  }
+  @media(max-width:1000px){ .cards { flex-direction:column; align-items:center; } }
 </style>
 </head>
 <body>
@@ -151,7 +135,7 @@
   </div>
 </div>
 
-<!-- Full site content -->
+<!-- Full Site Content -->
 <header>
   <div class="brand">Helix <span>Market</span></div>
   <nav>
@@ -192,7 +176,6 @@
       <div class="step">• Key beginner terms</div>
       <div class="step">• Setting up your first portfolio</div>
     </div>
-
     <div class="card">
       <h3>Step 2: Reading Charts</h3>
       <div class="step">• Candlesticks & patterns</div>
@@ -200,7 +183,6 @@
       <div class="step">• Indicators & trends</div>
       <div class="step">• Setup identification</div>
     </div>
-
     <div class="card">
       <h3>Step 3: Risk & Money Management</h3>
       <div class="step">• Position sizing</div>
@@ -208,7 +190,6 @@
       <div class="step">• Risk/Reward basics</div>
       <div class="step">• Journaling your trades</div>
     </div>
-
     <div class="card">
       <h3>Step 4: Strategy Mastery</h3>
       <div class="step">• Breakout & momentum</div>
@@ -284,13 +265,14 @@
   // Countdown logic
   const targetDate = new Date("March 16, 2026 00:00:00").getTime();
   const overlay = document.getElementById("comingSoonOverlay");
-
-  function updateCountdown() {
+  
+  function updateCountdown(){
     const now = new Date().getTime();
     const distance = targetDate - now;
 
     if(distance <= 0){
       overlay.style.display = "none"; // unlock site
+      document.body.style.overflow = "auto"; // enable scroll
       clearInterval(countdownInterval);
       return;
     }
@@ -307,7 +289,7 @@
   }
 
   updateCountdown();
-  const countdownInterval = setInterval(updateCountdown,1000);
+  const countdownInterval = setInterval(updateCountdown, 1000);
 </script>
 
 </body>
