@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Stock Market Dashboard</title>
+  <title>Helix Market</title>
   <script src="https://s3.tradingview.com/tv.js"></script>
 
   <style>
@@ -10,47 +10,81 @@
       font-family: Arial, sans-serif;
       background: radial-gradient(circle at top left, #111827, #000000 60%);
       color: white;
-      text-align: center;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      background: rgba(0,0,0,0.8);
+      border-bottom: 1px solid #111;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .brand span {
+      color: #00ff88;
     }
 
     .logo {
-      width: 140px;
-      margin-top: 25px;
-      opacity: 0.9;
+      width: 45px;
     }
 
-    h1 {
-      margin-top: 10px;
-      font-weight: 500;
-      letter-spacing: 1px;
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      margin: 0 10px;
+      cursor: pointer;
+      font-size: 15px;
     }
 
-    .chart-container {
-      width: 90%;
-      max-width: 1100px;
-      margin: 40px auto;
+    nav button:hover {
+      color: #00ff88;
+    }
+
+    .section {
+      display: none;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .chart-box {
+      background: rgba(20,20,20,0.9);
       padding: 20px;
       border-radius: 20px;
-      background: rgba(20, 20, 20, 0.8);
-      box-shadow: 0 0 40px rgba(0, 255, 136, 0.15);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 0 40px rgba(0,255,136,0.15);
+      margin-top: 20px;
     }
 
-    .container {
+    .grid {
       margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
-    .box {
-      background: rgba(30,30,30,0.8);
+    .card {
+      background: rgba(30,30,30,0.9);
       padding: 20px;
-      margin: 15px;
       border-radius: 15px;
-      display: inline-block;
       width: 200px;
-      transition: 0.3s ease;
+      transition: 0.3s;
     }
 
-    .box:hover {
+    .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 0 20px rgba(0,255,136,0.3);
     }
@@ -58,51 +92,140 @@
     .green { color: #00ff88; }
     .red { color: #ff4d4d; }
 
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 14px;
+      opacity: 0.6;
+    }
+
   </style>
 </head>
 
 <body>
 
-  <img src="logo.png" class="logo" />
-  <h1>Live Stock Market Dashboard</h1>
-
-  <div class="chart-container">
-    <div id="tradingview_chart"></div>
+<header>
+  <div class="brand">
+    <img src="logo.png" class="logo">
+    Helix <span>Market</span>
   </div>
 
-  <script>
-    new TradingView.widget({
-      "width": "100%",
-      "height": 500,
-      "symbol": "NASDAQ:AAPL",
-      "interval": "1",
-      "timezone": "Etc/UTC",
-      "theme": "dark",
-      "style": "1",
-      "locale": "en",
-      "toolbar_bg": "#000000",
-      "hide_top_toolbar": false,
-      "enable_publishing": false,
-      "container_id": "tradingview_chart"
-    });
-  </script>
+  <nav>
+    <button onclick="showTab('dashboard')">Dashboard</button>
+    <button onclick="showTab('crypto')">Crypto</button>
+    <button onclick="showTab('forex')">Forex</button>
+    <button onclick="showTab('indices')">Indices</button>
+    <button onclick="showTab('gainers')">Top Gainers</button>
+    <button onclick="showTab('losers')">Top Losers</button>
+  </nav>
+</header>
 
-  <div class="container">
-    <div class="box green">
-      <h2>Top Gainer</h2>
-      <p>NVDA +2.34%</p>
+<!-- DASHBOARD -->
+<div id="dashboard" class="section active">
+  <h1>Live Market Overview</h1>
+  <div class="chart-box">
+    <div id="chart1"></div>
+  </div>
+
+  <div class="grid">
+    <div class="card green">
+      <h3>Top Gainer</h3>
+      NVDA +2.34%
     </div>
-
-    <div class="box red">
-      <h2>Top Loser</h2>
-      <p>TSLA -1.45%</p>
+    <div class="card red">
+      <h3>Top Loser</h3>
+      TSLA -1.45%
     </div>
-
-    <div class="box green">
-      <h2>Biggest Rise</h2>
-      <p>AMD +3.12%</p>
+    <div class="card green">
+      <h3>Biggest Rise</h3>
+      AMD +3.12%
     </div>
   </div>
+</div>
+
+<!-- CRYPTO -->
+<div id="crypto" class="section">
+  <h1>Crypto Market</h1>
+  <div class="chart-box">
+    <div id="chart2"></div>
+  </div>
+</div>
+
+<!-- FOREX -->
+<div id="forex" class="section">
+  <h1>Forex Market</h1>
+  <div class="chart-box">
+    <div id="chart3"></div>
+  </div>
+</div>
+
+<!-- INDICES -->
+<div id="indices" class="section">
+  <h1>Global Indices</h1>
+  <div class="chart-box">
+    <div id="chart4"></div>
+  </div>
+</div>
+
+<!-- GAINERS -->
+<div id="gainers" class="section">
+  <h1 class="green">Top Gainers</h1>
+  <p>NVDA +2.34% | AMD +3.12% | META +1.89%</p>
+</div>
+
+<!-- LOSERS -->
+<div id="losers" class="section">
+  <h1 class="red">Top Losers</h1>
+  <p>TSLA -1.45% | NFLX -2.01% | BABA -1.20%</p>
+</div>
+
+<footer>
+  © 2026 Helix Market — Real-Time Financial Intelligence
+</footer>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  new TradingView.widget({
+    "width": "100%",
+    "height": 500,
+    "symbol": "NASDAQ:AAPL",
+    "interval": "1",
+    "theme": "dark",
+    "container_id": "chart1"
+  });
+
+  new TradingView.widget({
+    "width": "100%",
+    "height": 500,
+    "symbol": "BINANCE:BTCUSDT",
+    "interval": "5",
+    "theme": "dark",
+    "container_id": "chart2"
+  });
+
+  new TradingView.widget({
+    "width": "100%",
+    "height": 500,
+    "symbol": "FX:EURUSD",
+    "interval": "5",
+    "theme": "dark",
+    "container_id": "chart3"
+  });
+
+  new TradingView.widget({
+    "width": "100%",
+    "height": 500,
+    "symbol": "SP:SPX",
+    "interval": "5",
+    "theme": "dark",
+    "container_id": "chart4"
+  });
+</script>
 
 </body>
 </html>
