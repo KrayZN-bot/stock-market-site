@@ -15,17 +15,25 @@
       position: relative;
     }
 
-    /* Background with blur */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: url("https://static.vecteezy.com/system/resources/previews/026/726/959/large_2x/black-wave-landscape-background-free-photo.jpg") no-repeat center center fixed;
-      background-size: cover;
-      filter: blur(8px);
-      z-index: -1;
-      opacity: 0.65; /* Dark overlay for readability */
-    }
+/* Blurred background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url("https://static.vecteezy.com/system/resources/previews/026/726/959/large_2x/black-wave-landscape-background-free-photo.jpg") no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(8px);
+  z-index: -2; /* behind everything */
+}
+
+/* Dark overlay */
+body::after {
+  content: "";
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.65); /* dark tint */
+  z-index: -1;
+}
 
     /* Header */
     header {
