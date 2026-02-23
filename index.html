@@ -7,9 +7,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* Reset & Fonts */
+    /* Global */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: #0d0d0d; color: #fff; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      background: url("https://static.vecteezy.com/system/resources/previews/026/726/959/large_2x/black-wave-landscape-background-free-photo.jpg") no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    /* Overlay to increase contrast */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: -1;
+    }
 
     /* Header */
     header {
@@ -30,27 +44,35 @@
 
     /* Hero */
     .hero {
-      background: linear-gradient(135deg, #111827, #000000);
+      padding: 100px 20px;
       text-align: center;
-      padding: 80px 20px;
     }
-    .hero h1 { font-size: 48px; color: #00ff88; margin-bottom: 20px; }
-    .hero p { font-size: 20px; color: #ccc; max-width: 700px; margin: 0 auto 40px; }
-    .hero a { text-decoration: none; padding: 12px 30px; background: #00ff88; color: #000; font-weight: 600; border-radius: 8px; transition: 0.3s; }
+    .hero h1 { font-size: 54px; color: #00ff88; margin-bottom: 15px; }
+    .hero p { font-size: 20px; color: #ccc; max-width: 800px; margin: 0 auto 40px; }
+    .hero a {
+      text-decoration: none;
+      padding: 14px 36px;
+      background: #00ff88;
+      color: #000;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
     .hero a:hover { background: #00cc66; }
 
-    /* Section Layout */
+    /* Section */
     section { padding: 80px 50px; }
     section h2 { font-size: 36px; margin-bottom: 40px; color: #00ff88; text-align: center; }
 
+    /* Cards */
     .cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
     .card {
       background: rgba(30,30,30,0.95);
       border-radius: 20px;
       padding: 30px;
       width: 320px;
-      transition: transform 0.3s, box-shadow 0.3s;
       box-shadow: 0 0 20px rgba(0,255,136,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
     .card:hover {
       transform: translateY(-8px);
@@ -60,17 +82,17 @@
     .card p, .card .step { color: #ccc; font-size: 16px; margin-bottom: 10px; }
     .step { padding-left: 12px; border-left: 3px solid #00ff88; }
 
-    /* Charts */
+    /* Chart Boxes */
     .chart-box {
       background: rgba(20,20,20,0.95);
       border-radius: 20px;
-      padding: 30px;
+      padding: 35px;
       margin: 40px auto;
       max-width: 1100px;
       box-shadow: 0 0 40px rgba(0,255,136,0.2);
     }
 
-    /* Ad Section */
+    /* Ad Card */
     .ad-card {
       background: linear-gradient(135deg, #00ff88, #00cc66);
       padding: 35px;
@@ -93,6 +115,7 @@
     @media (max-width: 1000px) { .cards { flex-direction: column; align-items: center; } }
   </style>
 </head>
+
 <body>
 
 <header>
@@ -105,11 +128,11 @@
   </nav>
 </header>
 
-<!-- Hero Section -->
+<!-- Hero -->
 <div class="hero">
   <h1>Trade Smarter, Not Harder</h1>
-  <p>Unlock professional strategies, master charts, and grow your trading mindset. Helix Market gives you the tools to succeed in the markets.</p>
-  <a href="https://discord.gg/rQ38R9Bu7P">Join Our Discord</a>
+  <p>Unlock pro strategies, master charts, and level up your mindset with Helix Market Academy.</p>
+  <a href="https://discord.gg/rQ38R9Bu7P">Join Our Community</a>
 </div>
 
 <!-- Dashboard -->
@@ -124,69 +147,96 @@
   <div class="chart-box" id="chart2"></div>
 </section>
 
-<!-- Academy (Learn & Strategies) -->
+<!-- Academy -->
 <section id="academy">
-  <h2>Helix Academy — Learn, Trade, Invest</h2>
+  <h2>Helix Academy — Learn, Trade & Invest</h2>
   <p style="text-align:center; color:#ccc; max-width:800px; margin:0 auto 50px;">
-    Whether you’re starting with crypto or stocks, Helix Academy guides you step-by-step from beginner to pro. Learn market fundamentals, develop strategies, and grow the right mindset for success.
+    Whether you’re just getting started with crypto or aiming to master trading, we guide you step-by-step from fundamentals to advanced strategies.
   </p>
 
   <div class="cards">
     <div class="card">
-      <h3>Step 1: Foundation of Trading</h3>
-      <div class="step">• What is a stock, crypto, and ETF?</div>
-      <div class="step">• Market mechanics & price movement</div>
-      <div class="step">• Supply & demand opportunities</div>
-      <div class="step">• Key terminology for beginners</div>
+      <h3>Step 1: Foundations</h3>
+      <div class="step">• What is crypto, stocks & ETFs?</div>
+      <div class="step">• How markets move</div>
+      <div class="step">• Key beginner terms</div>
+      <div class="step">• Setting up your first portfolio</div>
     </div>
 
     <div class="card">
       <h3>Step 2: Reading Charts</h3>
-      <div class="step">• Candlestick patterns explained</div>
-      <div class="step">• Support & Resistance levels</div>
-      <div class="step">• Trendlines, moving averages, and indicators</div>
-      <div class="step">• Identifying trade setups like a pro</div>
+      <div class="step">• Candlesticks & patterns</div>
+      <div class="step">• Support & resistance</div>
+      <div class="step">• Indicators & trends</div>
+      <div class="step">• Setup identification</div>
     </div>
 
     <div class="card">
-      <h3>Step 3: Risk Management</h3>
-      <div class="step">• How much to risk per trade</div>
-      <div class="step">• Stop-loss & take-profit techniques</div>
-      <div class="step">• Risk/Reward ratios for consistent profits</div>
-      <div class="step">• Avoiding psychological pitfalls</div>
+      <h3>Step 3: Risk & Money Management</h3>
+      <div class="step">• Position sizing</div>
+      <div class="step">• Stop-loss & take-profit</div>
+      <div class="step">• Risk/Reward basics</div>
+      <div class="step">• Journaling your trades</div>
     </div>
 
     <div class="card">
       <h3>Step 4: Strategy Mastery</h3>
-      <div class="step">• Breakout and momentum strategies</div>
-      <div class="step">• Trend following and swing trades</div>
-      <div class="step">• Scalping for short-term gains</div>
-      <div class="step">• Combining strategies for your style</div>
+      <div class="step">• Breakout & momentum</div>
+      <div class="step">• Swing & trend trades</div>
+      <div class="step">• Scalping basics</div>
+      <div class="step">• Strategy combos</div>
     </div>
   </div>
 
   <div class="ad-card">
     🎓 Ready to level up? Join the <strong>Helix Academy</strong> today!  
-    Learn how to start investing in crypto, master trading strategies, and build a strong financial foundation.  
+    Get crypto investing lessons, trading strategies, mindset coaching & more.  
     <a href="https://discord.gg/rQ38R9Bu7P">Start Learning in Discord</a>
   </div>
 </section>
 
 <!-- Mindset -->
 <section id="mindset">
-  <h2>Trader Psychology</h2>
+  <h2>Trader Psychology — Master Your Mind</h2>
+  <p style="text-align:center; color:#ccc; max-width:800px; margin:0 auto 50px;">
+    Great traders think differently. These psychology principles help you stay disciplined, confident, and focused.
+  </p>
+
   <div class="cards">
     <div class="card">
       <h3>Control Emotions</h3>
-      <p>Fear and greed destroy accounts.</p>
+      <p>Manage fear, greed, & impulsiveness.</p>
+      <div class="step">• Recognize emotional triggers</div>
+      <div class="step">• Pause & reflect before acting</div>
+      <div class="step">• Track feelings in a journal</div>
     </div>
     <div class="card">
       <h3>Discipline & Consistency</h3>
-      <p>Following rules matters more than predictions.</p>
+      <p>Follow your plan every day.</p>
+      <div class="step">• Set trade rules in advance</div>
+      <div class="step">• Avoid revenge trading</div>
+      <div class="step">• Weekly reviews for improvement</div>
     </div>
     <div class="card">
-      <h3>Think Long-Term</h3>
-      <p>Focus on consistency, not single trades.</p>
+      <h3>Handling Losses</h3>
+      <p>Losses are feedback, not failure.</p>
+      <div class="step">• Analyze what went wrong</div>
+      <div class="step">• Adjust strategy, don’t overreact</div>
+      <div class="step">• Learn & move forward</div>
+    </div>
+    <div class="card">
+      <h3>Confidence Building</h3>
+      <p>Confidence is earned, not assumed.</p>
+      <div class="step">• Backtest your strategies</div>
+      <div class="step">• Start small & scale up</div>
+      <div class="step">• Focus on process over results</div>
+    </div>
+    <div class="card">
+      <h3>Mindfulness & Focus</h3>
+      <p>Stay present during trading.</p>
+      <div class="step">• Deep breathing routines</div>
+      <div class="step">• Remove distractions</div>
+      <div class="step">• Daily intention setting</div>
     </div>
   </div>
 </section>
