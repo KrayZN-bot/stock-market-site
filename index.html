@@ -88,6 +88,30 @@
       border-left: 3px solid #00ff88;
     }
 
+    .login-card {
+      background: rgba(25,25,25,0.95);
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 400px;
+      margin: 40px auto;
+      text-align: center;
+    }
+
+    .login-card button {
+      width: 80%;
+      margin: 10px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      color: white;
+    }
+
+    .discord-btn { background-color: #7289da; }
+    .google-btn { background-color: #4285F4; }
+    .apple-btn { background-color: #000000; }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -110,9 +134,9 @@
   <nav>
     <button onclick="showTab('dashboard')">Dashboard</button>
     <button onclick="showTab('crypto')">Crypto</button>
-    <button onclick="showTab('learn')">Learn</button>
-    <button onclick="showTab('strategies')">Strategies</button>
+    <button onclick="showTab('learn-strategies')">Learn & Strategies</button>
     <button onclick="showTab('mindset')">Mindset</button>
+    <button onclick="showTab('login')">Log In</button>
   </nav>
 </header>
 
@@ -132,9 +156,9 @@
   </div>
 </div>
 
-<!-- LEARN -->
-<div id="learn" class="section">
-  <h1>Beginner → Pro Trading Roadmap</h1>
+<!-- LEARN & STRATEGIES -->
+<div id="learn-strategies" class="section">
+  <h1>Learn & Master Trading</h1>
 
   <div class="card">
     <h3>Step 1: Understand Market Basics</h3>
@@ -144,7 +168,7 @@
   </div>
 
   <div class="card">
-    <h3>Step 2: Learn Chart Reading</h3>
+    <h3>Step 2: Chart Reading & Patterns</h3>
     <div class="step">• Candlestick patterns</div>
     <div class="step">• Support & Resistance</div>
     <div class="step">• Trendlines</div>
@@ -156,25 +180,17 @@
     <div class="step">• Stop losses are mandatory</div>
     <div class="step">• Risk/Reward ratio 1:2 minimum</div>
   </div>
-</div>
-
-<!-- STRATEGIES -->
-<div id="strategies" class="section">
-  <h1>Trading Strategies</h1>
 
   <div class="card">
-    <h3>Breakout Strategy</h3>
-    <p>Wait for price to break strong resistance with volume confirmation.</p>
+    <h3>Pro Strategies</h3>
+    <div class="step">• Breakout: Trade strong resistance with volume confirmation</div>
+    <div class="step">• Trend Following: Only trade in direction of major trend</div>
+    <div class="step">• Scalping: Quick trades on small timeframes</div>
   </div>
 
   <div class="card">
-    <h3>Trend Following</h3>
-    <p>Only trade in direction of major trend using moving averages.</p>
-  </div>
-
-  <div class="card">
-    <h3>Scalping</h3>
-    <p>Quick trades on small timeframes (1–5 min).</p>
+    <h3>Boost Your Skills with Helix Market</h3>
+    <p>Join our community on <a href="https://discord.gg/rQ38R9Bu7P" style="color:#00ff88;">Discord</a> and access premium strategies, live signals, and exclusive trading tools. Start leveling up today!</p>
   </div>
 </div>
 
@@ -198,6 +214,16 @@
   </div>
 </div>
 
+<!-- LOGIN -->
+<div id="login" class="section">
+  <div class="login-card">
+    <h2>Sign In or Sign Up</h2>
+    <button class="discord-btn" onclick="oauthLogin('discord')">Continue with Discord</button>
+    <button class="google-btn" onclick="oauthLogin('google')">Continue with Google</button>
+    <button class="apple-btn" onclick="oauthLogin('apple')">Continue with Apple</button>
+  </div>
+</div>
+
 <footer>
   © 2026 Helix Market — Trade. Learn. Master.
 </footer>
@@ -206,6 +232,11 @@
   function showTab(id) {
     document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
     document.getElementById(id).classList.add('active');
+  }
+
+  function oauthLogin(provider) {
+    // This redirects to backend endpoint to handle OAuth login
+    window.location.href = `/auth/${provider}`;
   }
 
   new TradingView.widget({
