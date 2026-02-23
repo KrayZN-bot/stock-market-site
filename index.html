@@ -1,242 +1,191 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Helix Market</title>
+  <meta charset="UTF-8">
+  <title>Helix Market — Trade. Learn. Master.</title>
   <script src="https://s3.tradingview.com/tv.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top left, #111827, #000000 60%);
-      color: white;
-    }
+    /* Reset & Fonts */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0d0d0d; color: #fff; }
 
+    /* Header */
     header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 40px;
-      background: rgba(0,0,0,0.9);
+      padding: 20px 50px;
+      background: rgba(0,0,0,0.85);
       border-bottom: 1px solid #111;
     }
+    .brand { font-weight: 700; font-size: 24px; display: flex; align-items: center; gap: 10px; }
+    .brand span { color: #00ff88; }
+    nav button { background: none; border: none; color: #fff; margin: 0 15px; font-size: 16px; cursor: pointer; transition: 0.3s; }
+    nav button:hover { color: #00ff88; }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .brand span {
-      color: #00ff88;
-    }
-
-    .logo {
-      width: 45px;
-    }
-
-    nav button {
-      background: none;
-      border: none;
-      color: white;
-      margin: 0 10px;
-      cursor: pointer;
-      font-size: 15px;
-    }
-
-    nav button:hover {
-      color: #00ff88;
-    }
-
-    .section {
-      display: none;
-      padding: 40px;
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #111827, #000000);
       text-align: center;
+      padding: 80px 20px;
     }
+    .hero h1 { font-size: 48px; color: #00ff88; margin-bottom: 20px; }
+    .hero p { font-size: 20px; color: #ccc; max-width: 700px; margin: 0 auto 40px; }
+    .hero a { text-decoration: none; padding: 12px 30px; background: #00ff88; color: #000; font-weight: 600; border-radius: 8px; transition: 0.3s; }
+    .hero a:hover { background: #00cc66; }
 
-    .active {
-      display: block;
-    }
+    /* Section Layout */
+    section { padding: 80px 50px; }
+    section h2 { font-size: 36px; margin-bottom: 40px; color: #00ff88; text-align: center; }
 
-    .chart-box {
-      background: rgba(20,20,20,0.9);
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 0 40px rgba(0,255,136,0.15);
-      margin-top: 20px;
-    }
-
+    .cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
     .card {
-      background: rgba(30,30,30,0.9);
-      padding: 25px;
-      border-radius: 15px;
-      margin: 20px auto;
-      max-width: 700px;
-      text-align: left;
+      background: rgba(30,30,30,0.95);
+      border-radius: 20px;
+      padding: 30px;
+      width: 320px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 20px rgba(0,255,136,0.2);
     }
-
-    .card h3 {
-      color: #00ff88;
-      margin-bottom: 10px;
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 40px rgba(0,255,136,0.4);
     }
+    .card h3 { color: #00ff88; margin-bottom: 15px; }
+    .card p, .card .step { color: #ccc; font-size: 16px; margin-bottom: 10px; }
+    .step { padding-left: 12px; border-left: 3px solid #00ff88; }
 
-    .step {
-      margin: 15px 0;
-      padding-left: 15px;
-      border-left: 3px solid #00ff88;
-    }
-
-    .login-card {
-      background: rgba(25,25,25,0.95);
-      padding: 25px;
-      border-radius: 15px;
-      max-width: 400px;
+    /* Charts */
+    .chart-box {
+      background: rgba(20,20,20,0.95);
+      border-radius: 20px;
+      padding: 30px;
       margin: 40px auto;
+      max-width: 1100px;
+      box-shadow: 0 0 40px rgba(0,255,136,0.2);
+    }
+
+    /* Ad Section */
+    .ad-card {
+      background: linear-gradient(135deg, #00ff88, #00cc66);
+      padding: 35px;
+      border-radius: 20px;
+      max-width: 900px;
+      margin: 60px auto;
       text-align: center;
+      color: #000;
+      font-weight: 600;
+      font-size: 20px;
+      transition: transform 0.3s;
     }
+    .ad-card:hover { transform: scale(1.05); }
+    .ad-card a { color: #000; font-weight: 700; text-decoration: underline; }
 
-    .login-card button {
-      width: 80%;
-      margin: 10px 0;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      color: white;
-    }
+    /* Footer */
+    footer { text-align: center; padding: 40px 20px; font-size: 14px; opacity: 0.6; }
 
-    .discord-btn { background-color: #7289da; }
-    .google-btn { background-color: #4285F4; }
-    .apple-btn { background-color: #000000; }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      font-size: 14px;
-      opacity: 0.6;
-    }
-
+    /* Responsive */
+    @media (max-width: 1000px) { .cards { flex-direction: column; align-items: center; } }
   </style>
 </head>
-
 <body>
 
 <header>
-  <div class="brand">
-    <img src="logo.png" class="logo">
-    Helix <span>Market</span>
-  </div>
-
+  <div class="brand">Helix <span>Market</span></div>
   <nav>
-    <button onclick="showTab('dashboard')">Dashboard</button>
-    <button onclick="showTab('crypto')">Crypto</button>
-    <button onclick="showTab('learn-strategies')">Learn & Strategies</button>
-    <button onclick="showTab('mindset')">Mindset</button>
-    <button onclick="showTab('login')">Log In</button>
+    <button onclick="scrollToSection('dashboard')">Dashboard</button>
+    <button onclick="scrollToSection('crypto')">Crypto</button>
+    <button onclick="scrollToSection('learn-strategies')">Learn & Strategies</button>
+    <button onclick="scrollToSection('mindset')">Mindset</button>
   </nav>
 </header>
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="section active">
-  <h1>Live Market Overview</h1>
-  <div class="chart-box">
-    <div id="chart1"></div>
-  </div>
+<!-- Hero Section -->
+<div class="hero">
+  <h1>Trade Smarter, Not Harder</h1>
+  <p>Unlock professional strategies, master charts, and grow your trading mindset. Helix Market gives you the tools to succeed in the markets.</p>
+  <a href="https://discord.gg/rQ38R9Bu7P">Join Our Discord</a>
 </div>
 
-<!-- CRYPTO -->
-<div id="crypto" class="section">
-  <h1>Crypto Market</h1>
-  <div class="chart-box">
-    <div id="chart2"></div>
-  </div>
-</div>
+<!-- Dashboard -->
+<section id="dashboard">
+  <h2>Live Market Overview</h2>
+  <div class="chart-box" id="chart1"></div>
+</section>
 
-<!-- LEARN & STRATEGIES -->
-<div id="learn-strategies" class="section">
-  <h1>Learn & Master Trading</h1>
+<!-- Crypto -->
+<section id="crypto">
+  <h2>Crypto Market</h2>
+  <div class="chart-box" id="chart2"></div>
+</section>
 
-  <div class="card">
-    <h3>Step 1: Understand Market Basics</h3>
-    <div class="step">• What is a stock?</div>
-    <div class="step">• What moves price?</div>
-    <div class="step">• Supply & Demand</div>
-  </div>
-
-  <div class="card">
-    <h3>Step 2: Chart Reading & Patterns</h3>
-    <div class="step">• Candlestick patterns</div>
-    <div class="step">• Support & Resistance</div>
-    <div class="step">• Trendlines</div>
-  </div>
-
-  <div class="card">
-    <h3>Step 3: Risk Management</h3>
-    <div class="step">• Never risk more than 1–2%</div>
-    <div class="step">• Stop losses are mandatory</div>
-    <div class="step">• Risk/Reward ratio 1:2 minimum</div>
-  </div>
-
-  <div class="card">
-    <h3>Pro Strategies</h3>
-    <div class="step">• Breakout: Trade strong resistance with volume confirmation</div>
-    <div class="step">• Trend Following: Only trade in direction of major trend</div>
-    <div class="step">• Scalping: Quick trades on small timeframes</div>
-  </div>
-
-  <div class="card">
-    <h3>Boost Your Skills with Helix Market</h3>
-    <p>Join our community on <a href="https://discord.gg/rQ38R9Bu7P" style="color:#00ff88;">Discord</a> and access premium strategies, live signals, and exclusive trading tools. Start leveling up today!</p>
-  </div>
-</div>
-
-<!-- MINDSET -->
-<div id="mindset" class="section">
-  <h1>Trader Psychology</h1>
-
-  <div class="card">
-    <h3>Control Emotions</h3>
-    <p>Fear and greed destroy accounts.</p>
+<!-- Learn & Strategies -->
+<section id="learn-strategies">
+  <h2>Learn & Master Trading</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Step 1: Market Basics</h3>
+      <div class="step">• What is a stock?</div>
+      <div class="step">• What moves price?</div>
+      <div class="step">• Supply & Demand</div>
+    </div>
+    <div class="card">
+      <h3>Step 2: Chart Reading</h3>
+      <div class="step">• Candlestick patterns</div>
+      <div class="step">• Support & Resistance</div>
+      <div class="step">• Trendlines</div>
+    </div>
+    <div class="card">
+      <h3>Step 3: Risk Management</h3>
+      <div class="step">• Never risk more than 1–2%</div>
+      <div class="step">• Stop losses are mandatory</div>
+      <div class="step">• Risk/Reward ratio 1:2 minimum</div>
+    </div>
+    <div class="card">
+      <h3>Pro Strategies</h3>
+      <div class="step">• Breakout: Trade strong resistance with volume confirmation</div>
+      <div class="step">• Trend Following: Trade in direction of the trend</div>
+      <div class="step">• Scalping: Quick trades on small timeframes</div>
+    </div>
   </div>
 
-  <div class="card">
-    <h3>Discipline > Strategy</h3>
-    <p>Following rules consistently matters more than prediction.</p>
+  <div class="ad-card">
+    Boost your skills with Helix Market! Join our community on 
+    <a href="https://discord.gg/rQ38R9Bu7P">Discord</a> for premium strategies, live signals, and exclusive tools.
   </div>
+</section>
 
-  <div class="card">
-    <h3>Long-Term Thinking</h3>
-    <p>Focus on consistency, not single trades.</p>
+<!-- Mindset -->
+<section id="mindset">
+  <h2>Trader Psychology</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Control Emotions</h3>
+      <p>Fear and greed destroy accounts.</p>
+    </div>
+    <div class="card">
+      <h3>Discipline & Consistency</h3>
+      <p>Following rules matters more than predictions.</p>
+    </div>
+    <div class="card">
+      <h3>Think Long-Term</h3>
+      <p>Focus on consistency, not single trades.</p>
+    </div>
   </div>
-</div>
-
-<!-- LOGIN -->
-<div id="login" class="section">
-  <div class="login-card">
-    <h2>Sign In or Sign Up</h2>
-    <button class="discord-btn" onclick="oauthLogin('discord')">Continue with Discord</button>
-    <button class="google-btn" onclick="oauthLogin('google')">Continue with Google</button>
-    <button class="apple-btn" onclick="oauthLogin('apple')">Continue with Apple</button>
-  </div>
-</div>
+</section>
 
 <footer>
   © 2026 Helix Market — Trade. Learn. Master.
 </footer>
 
 <script>
-  function showTab(id) {
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
-
-  function oauthLogin(provider) {
-    // This redirects to backend endpoint to handle OAuth login
-    window.location.href = `/auth/${provider}`;
+  function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
   }
 
   new TradingView.widget({
