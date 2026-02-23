@@ -15,25 +15,25 @@
       position: relative;
     }
 
-/* Blurred background */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: url("https://static.vecteezy.com/system/resources/previews/026/726/959/large_2x/black-wave-landscape-background-free-photo.jpg") no-repeat center center fixed;
-  background-size: cover;
-  filter: blur(8px);
-  z-index: -2; /* behind everything */
-}
+    /* Blurred background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url("https://static.vecteezy.com/system/resources/previews/026/726/959/large_2x/black-wave-landscape-background-free-photo.jpg") no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(8px);
+      z-index: -2;
+    }
 
-/* Dark overlay */
-body::after {
-  content: "";
-  position: fixed;
-  top:0; left:0; right:0; bottom:0;
-  background: rgba(0,0,0,0.65); /* dark tint */
-  z-index: -1;
-}
+    /* Dark overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.65);
+      z-index: -1;
+    }
 
     /* Header */
     header {
@@ -57,7 +57,8 @@ body::after {
       padding: 100px 20px;
       text-align: center;
     }
-    .hero h1 { font-size: 54px; color: #00ff88; margin-bottom: 15px; }
+    .hero h1 { font-size: 54px; margin-bottom: 15px; }
+
     .hero p { font-size: 20px; color: #ccc; max-width: 800px; margin: 0 auto 40px; }
     .hero a {
       text-decoration: none;
@@ -72,7 +73,25 @@ body::after {
 
     /* Section */
     section { padding: 80px 50px; }
-    section h2 { font-size: 36px; margin-bottom: 40px; color: #00ff88; text-align: center; }
+
+    /* Neon Gradient Headers with glow */
+    h1, h2 {
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(90deg, #00ff88, #00cc66, #00ff88);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 5px #00ff88, 0 0 10px #00ff88, 0 0 20px #00ff88;
+      margin-bottom: 30px;
+      line-height: 1.2;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(15px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
 
     /* Cards */
     .cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
@@ -123,6 +142,7 @@ body::after {
 
     /* Responsive */
     @media (max-width: 1000px) { .cards { flex-direction: column; align-items: center; } }
+
   </style>
 </head>
 
@@ -216,37 +236,37 @@ body::after {
     <div class="card">
       <h3>Control Emotions</h3>
       <p>Manage fear, greed, & impulsiveness.</p>
-      <div class="step"> • Recognize emotional triggers</div>
-      <div class="step"> • Pause & reflect before acting</div>
-      <div class="step"> • Track feelings in a journal</div>
+      <div class="step">• Recognize emotional triggers</div>
+      <div class="step">• Pause & reflect before acting</div>
+      <div class="step">• Track feelings in a journal</div>
     </div>
     <div class="card">
       <h3>Discipline & Consistency</h3>
       <p>Follow your plan every day.</p>
-      <div class="step"> • Set trade rules in advance</div>
-      <div class="step"> • Avoid revenge trading</div>
-      <div class="step"> • Weekly reviews for improvement</div>
+      <div class="step">• Set trade rules in advance</div>
+      <div class="step">• Avoid revenge trading</div>
+      <div class="step">• Weekly reviews for improvement</div>
     </div>
     <div class="card">
       <h3>Handling Losses</h3>
       <p>Losses are feedback, not failure.</p>
-      <div class="step"> • Analyze what went wrong</div>
-      <div class="step"> • Adjust strategy, don’t overreact</div>
-      <div class="step"> • Learn & move forward</div>
+      <div class="step">• Analyze what went wrong</div>
+      <div class="step">• Adjust strategy, don’t overreact</div>
+      <div class="step">• Learn & move forward</div>
     </div>
     <div class="card">
       <h3>Confidence Building</h3>
       <p>Confidence is earned, not assumed.</p>
-      <div class="step"> • Backtest your strategies</div>
-      <div class="step"> • Start small & scale up</div>
-      <div class="step"> • Focus on process over results</div>
+      <div class="step">• Backtest your strategies</div>
+      <div class="step">• Start small & scale up</div>
+      <div class="step">• Focus on process over results</div>
     </div>
     <div class="card">
       <h3>Mindfulness & Focus</h3>
       <p>Stay present during trading.</p>
-      <div class="step"> • Deep breathing routines</div>
-      <div class="step"> • Remove distractions</div>
-      <div class="step"> • Daily intention setting</div>
+      <div class="step">• Deep breathing routines</div>
+      <div class="step">• Remove distractions</div>
+      <div class="step">• Daily intention setting</div>
     </div>
   </div>
 </section>
