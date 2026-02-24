@@ -10,14 +10,13 @@
   * { margin:0; padding:0; box-sizing:border-box; }
   html, body { height: 100%; font-family: 'Inter', sans-serif; overflow: hidden; }
 
-  /* Full background blur */
+  /* Background */
   body::before {
     content: "";
     position: fixed;
     top:0; left:0; right:0; bottom:0;
     background: url("https://static.vecteezy.com/system/resources/previews/026/726/959/large_2x/black-wave-landscape-background-free-photo.jpg") no-repeat center center fixed;
     background-size: cover;
-    filter: blur(10px);
     z-index: -2;
   }
   body::after {
@@ -26,6 +25,14 @@
     top:0; left:0; right:0; bottom:0;
     background: rgba(0,0,0,0.65);
     z-index: -1;
+  }
+
+  /* Blur wrapper */
+  #siteContent {
+    filter: blur(12px);
+    pointer-events: none; /* Disable interaction while blurred */
+    user-select: none;
+    transition: filter 0.5s ease;
   }
 
   /* Coming Soon Overlay */
@@ -41,85 +48,65 @@
     z-index: 9999;
     text-align: center;
   }
-  #comingSoonOverlay h1 {
-    font-size: 60px;
-    margin-bottom: 50px;
-  }
-  .countdown {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    font-family: 'Courier New', monospace;
-    font-size: 48px;
-    letter-spacing: 2px;
-  }
-  .countdown div { display: flex; flex-direction: column; align-items: center; }
-  .countdown div span { font-size: 24px; color: #ccc; margin-top: 5px; }
-
+  #comingSoonOverlay h1 { font-size: 60px; margin-bottom:50px; }
+  .countdown { display:flex; justify-content:center; gap:40px; font-family:'Courier New', monospace; font-size:48px; }
+  .countdown div { display:flex; flex-direction: column; align-items:center; }
+  .countdown div span { font-size:24px; color:#ccc; margin-top:5px; }
   @media(max-width:600px){
-    #comingSoonOverlay h1 { font-size:40px; }
-    .countdown { flex-direction: column; gap:20px; font-size:36px; }
-    .countdown div span { font-size:18px; }
+    #comingSoonOverlay h1{font-size:40px;}
+    .countdown{flex-direction:column; gap:20px; font-size:36px;}
+    .countdown div span{font-size:18px;}
   }
 
   /* Header */
   header {
-    position: sticky;
-    top:0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    background: rgba(0,0,0,0.85);
-    border-bottom: 1px solid #111;
+    position: sticky; top:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 50px; background: rgba(0,0,0,0.85); border-bottom:1px solid #111;
   }
-  .brand { font-weight: 700; font-size: 24px; display:flex; align-items:center; gap:10px; }
-  .brand span { color: #00ff88; }
+  .brand { font-weight:700; font-size:24px; display:flex; align-items:center; gap:10px; }
+  .brand span { color:#00ff88; }
   nav button { background:none; border:none; color:#fff; margin:0 15px; font-size:16px; cursor:pointer; transition:0.3s; }
-  nav button:hover { color:#00ff88; }
+  nav button:hover{color:#00ff88;}
 
   /* Hero */
-  .hero { padding: 100px 20px; text-align:center; }
-  .hero h1 { font-size:54px; margin-bottom:15px; }
-  .hero p { font-size:20px; color:#ccc; max-width:800px; margin:0 auto 40px; }
-  .hero a { text-decoration:none; padding:14px 36px; background:#00ff88; color:#000; font-weight:600; border-radius:8px; transition:0.3s; }
-  .hero a:hover { background:#00cc66; }
+  .hero { padding:100px 20px; text-align:center; }
+  .hero h1{font-size:54px; margin-bottom:15px;}
+  .hero p{font-size:20px; color:#ccc; max-width:800px; margin:0 auto 40px;}
+  .hero a{ text-decoration:none; padding:14px 36px; background:#00ff88; color:#000; font-weight:600; border-radius:8px; transition:0.3s;}
+  .hero a:hover{background:#00cc66;}
 
   /* Sections */
-  section { padding:80px 50px; }
-
-  /* Headers with same text colors as original */
-  h1,h2 { color: #00ff88; margin-bottom:30px; text-align:center; line-height:1.2; }
+  section{padding:80px 50px;}
+  h1,h2{color:#00ff88; margin-bottom:30px; text-align:center; line-height:1.2;}
 
   /* Cards */
   .cards { display:flex; flex-wrap:wrap; justify-content:center; gap:30px; }
   .card {
     background: rgba(30,30,30,0.95);
-    border-radius: 20px;
+    border-radius:20px;
     padding:30px;
     width:320px;
     box-shadow:0 0 20px rgba(0,255,136,0.2);
     transition: transform 0.3s, box-shadow 0.3s;
   }
-  .card:hover { transform:translateY(-8px); box-shadow:0 0 40px rgba(0,255,136,0.4); }
-  .card h3 { color:#00ff88; margin-bottom:15px; }
-  .card p, .card .step { color:#ccc; font-size:16px; margin-bottom:10px; }
-  .step { padding-left:12px; border-left:3px solid #00ff88; }
+  .card:hover{ transform:translateY(-8px); box-shadow:0 0 40px rgba(0,255,136,0.4);}
+  .card h3{ color:#00ff88; margin-bottom:15px;}
+  .card p, .card .step{color:#ccc; font-size:16px; margin-bottom:10px;}
+  .step{padding-left:12px; border-left:3px solid #00ff88;}
 
   /* Chart Boxes */
-  .chart-box { background: rgba(20,20,20,0.95); border-radius:20px; padding:35px; margin:40px auto; max-width:1100px; box-shadow:0 0 40px rgba(0,255,136,0.2); }
+  .chart-box{ background: rgba(20,20,20,0.95); border-radius:20px; padding:35px; margin:40px auto; max-width:1100px; box-shadow:0 0 40px rgba(0,255,136,0.2); }
 
   /* Ad Card */
   .ad-card { background: linear-gradient(135deg, #00ff88, #00cc66); padding:35px; border-radius:20px; max-width:900px; margin:60px auto; text-align:center; color:#000; font-weight:600; font-size:20px; transition: transform 0.3s; }
-  .ad-card:hover { transform: scale(1.05); }
-  .ad-card a { color:#000; font-weight:700; text-decoration:underline; }
+  .ad-card:hover { transform: scale(1.05);}
+  .ad-card a{ color:#000; font-weight:700; text-decoration:underline;}
 
   /* Footer */
-  footer { text-align:center; padding:40px 20px; font-size:14px; opacity:0.6; }
+  footer{ text-align:center; padding:40px 20px; font-size:14px; opacity:0.6;}
 
-  /* Responsive */
-  @media(max-width:1000px){ .cards { flex-direction:column; align-items:center; } }
+  @media(max-width:1000px){ .cards{flex-direction:column; align-items:center;} }
 </style>
 </head>
 <body>
@@ -135,125 +122,79 @@
   </div>
 </div>
 
-<!-- Full Site Content -->
-<header>
-  <div class="brand">Helix <span>Market</span></div>
-  <nav>
-    <button onclick="scrollToSection('dashboard')">Dashboard</button>
-    <button onclick="scrollToSection('crypto')">Crypto</button>
-    <button onclick="scrollToSection('academy')">Academy</button>
-    <button onclick="scrollToSection('mindset')">Mindset</button>
-  </nav>
-</header>
+<!-- Site Content -->
+<div id="siteContent">
+  <header>
+    <div class="brand">Helix <span>Market</span></div>
+    <nav>
+      <button onclick="scrollToSection('dashboard')">Dashboard</button>
+      <button onclick="scrollToSection('crypto')">Crypto</button>
+      <button onclick="scrollToSection('academy')">Academy</button>
+      <button onclick="scrollToSection('mindset')">Mindset</button>
+    </nav>
+  </header>
 
-<div class="hero">
-  <h1>Trade Smarter, Not Harder</h1>
-  <p>Unlock pro strategies, master charts, and level up your mindset with Helix Market Academy.</p>
-  <a href="https://discord.gg/rQ38R9Bu7P">Join Our Community</a>
+  <div class="hero">
+    <h1>Trade Smarter, Not Harder</h1>
+    <p>Unlock pro strategies, master charts, and level up your mindset with Helix Market Academy.</p>
+    <a href="https://discord.gg/rQ38R9Bu7P">Join Our Community</a>
+  </div>
+
+  <section id="dashboard">
+    <h2>Live Market Overview</h2>
+    <div class="chart-box" id="chart1"></div>
+  </section>
+
+  <section id="crypto">
+    <h2>Crypto Market</h2>
+    <div class="chart-box" id="chart2"></div>
+  </section>
+
+  <section id="academy">
+    <h2>Helix Academy — Learn, Trade & Invest</h2>
+    <p style="text-align:center; color:#ccc; max-width:800px; margin:0 auto 50px;">
+      Whether you’re just getting started with crypto or aiming to master trading, we guide you step-by-step from fundamentals to advanced strategies.
+    </p>
+    <div class="cards">
+      <div class="card">
+        <h3>Step 1: Foundations</h3>
+        <div class="step">• What is crypto, stocks & ETFs?</div>
+        <div class="step">• How markets move</div>
+        <div class="step">• Key beginner terms</div>
+        <div class="step">• Setting up your first portfolio</div>
+      </div>
+      <div class="card">
+        <h3>Step 2: Reading Charts</h3>
+        <div class="step">• Candlesticks & patterns</div>
+        <div class="step">• Support & resistance</div>
+        <div class="step">• Indicators & trends</div>
+        <div class="step">• Setup identification</div>
+      </div>
+      <div class="card">
+        <h3>Step 3: Risk & Money Management</h3>
+        <div class="step">• Position sizing</div>
+        <div class="step">• Stop-loss & take-profit</div>
+        <div class="step">• Risk/Reward basics</div>
+        <div class="step">• Journaling your trades</div>
+      </div>
+    </div>
+    <div class="ad-card">
+      🎓 Ready to level up? Join the <strong>Helix Academy</strong> today!  
+      <a href="https://discord.gg/rQ38R9Bu7P">Start Learning in Discord</a>
+    </div>
+  </section>
+
+  <section id="mindset">
+    <h2>Trader Psychology — Master Your Mind</h2>
+    <div class="cards">
+      <div class="card"><h3>Control Emotions</h3><div class="step">• Recognize triggers</div></div>
+      <div class="card"><h3>Discipline & Consistency</h3><div class="step">• Follow rules</div></div>
+      <div class="card"><h3>Handling Losses</h3><div class="step">• Learn & move forward</div></div>
+    </div>
+  </section>
+
+  <footer>© 2026 Helix Market — Trade. Learn. Master.</footer>
 </div>
-
-<section id="dashboard">
-  <h2>Live Market Overview</h2>
-  <div class="chart-box" id="chart1"></div>
-</section>
-
-<section id="crypto">
-  <h2>Crypto Market</h2>
-  <div class="chart-box" id="chart2"></div>
-</section>
-
-<section id="academy">
-  <h2>Helix Academy — Learn, Trade & Invest</h2>
-  <p style="text-align:center; color:#ccc; max-width:800px; margin:0 auto 50px;">
-    Whether you’re just getting started with crypto or aiming to master trading, we guide you step-by-step from fundamentals to advanced strategies.
-  </p>
-
-  <div class="cards">
-    <div class="card">
-      <h3>Step 1: Foundations</h3>
-      <div class="step">• What is crypto, stocks & ETFs?</div>
-      <div class="step">• How markets move</div>
-      <div class="step">• Key beginner terms</div>
-      <div class="step">• Setting up your first portfolio</div>
-    </div>
-    <div class="card">
-      <h3>Step 2: Reading Charts</h3>
-      <div class="step">• Candlesticks & patterns</div>
-      <div class="step">• Support & resistance</div>
-      <div class="step">• Indicators & trends</div>
-      <div class="step">• Setup identification</div>
-    </div>
-    <div class="card">
-      <h3>Step 3: Risk & Money Management</h3>
-      <div class="step">• Position sizing</div>
-      <div class="step">• Stop-loss & take-profit</div>
-      <div class="step">• Risk/Reward basics</div>
-      <div class="step">• Journaling your trades</div>
-    </div>
-    <div class="card">
-      <h3>Step 4: Strategy Mastery</h3>
-      <div class="step">• Breakout & momentum</div>
-      <div class="step">• Swing & trend trades</div>
-      <div class="step">• Scalping basics</div>
-      <div class="step">• Strategy combos</div>
-    </div>
-  </div>
-
-  <div class="ad-card">
-    🎓 Ready to level up? Join the <strong>Helix Academy</strong> today!  
-    Get crypto investing lessons, trading strategies, mindset coaching & more.  
-    <a href="https://discord.gg/rQ38R9Bu7P">Start Learning in Discord</a>
-  </div>
-</section>
-
-<section id="mindset">
-  <h2>Trader Psychology — Master Your Mind</h2>
-  <p style="text-align:center; color:#ccc; max-width:800px; margin:0 auto 50px;">
-    Great traders think differently. These psychology principles help you stay disciplined, confident, and focused.
-  </p>
-
-  <div class="cards">
-    <div class="card">
-      <h3>Control Emotions</h3>
-      <p>Manage fear, greed, & impulsiveness.</p>
-      <div class="step">• Recognize emotional triggers</div>
-      <div class="step">• Pause & reflect before acting</div>
-      <div class="step">• Track feelings in a journal</div>
-    </div>
-    <div class="card">
-      <h3>Discipline & Consistency</h3>
-      <p>Follow your plan every day.</p>
-      <div class="step">• Set trade rules in advance</div>
-      <div class="step">• Avoid revenge trading</div>
-      <div class="step">• Weekly reviews for improvement</div>
-    </div>
-    <div class="card">
-      <h3>Handling Losses</h3>
-      <p>Losses are feedback, not failure.</p>
-      <div class="step">• Analyze what went wrong</div>
-      <div class="step">• Adjust strategy, don’t overreact</div>
-      <div class="step">• Learn & move forward</div>
-    </div>
-    <div class="card">
-      <h3>Confidence Building</h3>
-      <p>Confidence is earned, not assumed.</p>
-      <div class="step">• Backtest your strategies</div>
-      <div class="step">• Start small & scale up</div>
-      <div class="step">• Focus on process over results</div>
-    </div>
-    <div class="card">
-      <h3>Mindfulness & Focus</h3>
-      <p>Stay present during trading.</p>
-      <div class="step">• Deep breathing routines</div>
-      <div class="step">• Remove distractions</div>
-      <div class="step">• Daily intention setting</div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  © 2026 Helix Market — Trade. Learn. Master.
-</footer>
 
 <script>
   function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
@@ -265,13 +206,16 @@
   // Countdown logic
   const targetDate = new Date("March 16, 2026 00:00:00").getTime();
   const overlay = document.getElementById("comingSoonOverlay");
-  
+  const site = document.getElementById("siteContent");
+
   function updateCountdown(){
     const now = new Date().getTime();
     const distance = targetDate - now;
 
     if(distance <= 0){
-      overlay.style.display = "none"; // unlock site
+      overlay.style.display = "none";
+      site.style.filter = "none";          // remove blur
+      site.style.pointerEvents = "auto";   // enable interaction
       document.body.style.overflow = "auto"; // enable scroll
       clearInterval(countdownInterval);
       return;
@@ -289,7 +233,7 @@
   }
 
   updateCountdown();
-  const countdownInterval = setInterval(updateCountdown, 1000);
+  const countdownInterval = setInterval(updateCountdown,1000);
 </script>
 
 </body>
